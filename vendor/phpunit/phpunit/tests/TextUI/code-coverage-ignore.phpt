@@ -16,7 +16,7 @@ $_SERVER['argv'][5] = '--whitelist';
 $_SERVER['argv'][6] = __DIR__ . '/../_files/IgnoreCodeCoverageClass.php';
 
 require __DIR__ . '/../bootstrap.php';
-PHPUnit\TextUI\Command::main();
+PHPUnit_TextUI_Command::main();
 --EXPECTF--
 PHPUnit %s by Sebastian Bergmann and contributors.
 
@@ -31,6 +31,6 @@ Code Coverage Report:%w
 %s
 %w
  Summary:%w
-  Classes:%w(0/0)%w
+  Classes: 100.00% (1/1)
   Methods:%w(0/0)%w
   Lines:%w(0/0)%w
