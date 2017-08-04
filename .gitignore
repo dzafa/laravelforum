@@ -5,5 +5,5 @@
 Homestead.json
 Homestead.yaml
 npm-debug.log
+.gitignore
 yarn-error.log
-/vendor/
