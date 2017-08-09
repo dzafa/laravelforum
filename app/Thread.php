@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Thread extends Model
 {
+    protected $quarded = [];
+    
     public function path(){
         return '/threads/' . $this->id;
     }
@@ -18,5 +20,8 @@ class Thread extends Model
         return $this->belongsTo(User::class,'user_id');
     }
 
+    public function addReply($reply){
+        $this->replies()->create($reply);
+    }
 
 }

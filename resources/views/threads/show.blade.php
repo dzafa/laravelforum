@@ -19,17 +19,16 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             @foreach ($thread->replies as $reply)
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <div class="author"><a href="#">{{ $reply->owner->name}}</a>
-                            on {{$reply->created_at->diffForHumans()}}</div>
-                    <div class="panel-body">
-                        <div class="body">{{$reply->body}}</div>
-                    </div>
-                </div>
-            </div>
+                @include('threads.partials.reply')
             @endforeach
         </div>
     </div>
+    @if (auth()->check())
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+           Hello
+        </div>
+    </div>
+    @endif
 </div>
 @endsection
