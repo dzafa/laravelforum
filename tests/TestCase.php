@@ -17,8 +17,18 @@ abstract class TestCase extends BaseTestCase
     public function setUp(){
         parent::setUp();
 
-        $this->thread = factory('App\Thread')->create();
+        $this->thread = create('App\Thread');
 
-        $this->reply = factory('App\Reply')->create(['thread_id' => $this->thread->id]);
+        $this->reply = create('App\Reply', ['thread_id' => $this->thread->id]);
     }
+
+    public function signIn($user = null)
+    {
+        $user = $user ?: create('App\User');
+
+        $this->be($user);
+
+        return $this;
+    }
+    
 }

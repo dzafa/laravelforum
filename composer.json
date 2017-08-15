@@ -27,7 +27,7 @@
         "psr-4": {
             "Tests\\": "tests/"
         },
-        "files" : ["test/utilities/functions.php"] 
+        "files" : ["tests/Utilities/functions.php"] 
     },
     "extra": {
         "laravel": {

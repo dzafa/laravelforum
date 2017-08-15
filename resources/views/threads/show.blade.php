@@ -16,15 +16,15 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-8 col-md-offset-2">
             @foreach ($thread->replies as $reply)
                 @include('threads.partials.reply')
             @endforeach
         </div>
     </div>
     @if (auth()->check())
-    <div class="row" style="padding:0px 0px 20px 0px;">
-        <div class="col-md-4 col-md-offset-4">
+    <div class="row">
+       <div class="col-md-6 col-md-offset-3">
              <form class="form-horizontal" method="POST" action="{{ $thread->path().'/replies'}}">
                 {{ csrf_field() }}
                 <div class="form-group">
