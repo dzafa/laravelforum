@@ -4,29 +4,24 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ParticipateInForum extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    
-    use DatabaseMigrations;
+    public function test_guest_user_can_not_participate_in_forum_threads()
+    {      
+        $this->expectException('Illuminate\Auth\AuthenticationException');
+        $this->post($this->thread->path().'/replies', []);
+    }
 
-    public function test_a_authenticate_user_may_participate_in_forum_threads(){
+    public function test_authenticate_user_can_participate_in_forum_threads()
+    {
+        $this->be($this->thread->owner);
         
-        $this->be($user = factory('App\User')->create());
+        $reply = factory('App\Reply')->make(['user_id' => $this->thread->owner->id]);
+        
+        $this->post($this->thread->path().'/replies', $reply->toArray());
 
-        $thread = factory('App\Thread')->create();
-
-        $reply = factory('App\Reply')->make();
-
-        $this->post($thread->path().'/replies', $reply->toArray());
-
-        $this->get($thread->path())
+        $this->get($this->thread->path())
             ->assertSee($reply->body);
     }
 }

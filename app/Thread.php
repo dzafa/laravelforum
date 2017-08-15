@@ -6,14 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Thread extends Model
 {
-    protected $quarded = [];
-    
-    public function path(){
+    protected $fillable = ['title','body','user_id'];
+
+    public function path()
+    {
         return '/threads/' . $this->id;
     }
 
     public function replies(){
-        return $this->hasMany(Reply::class);
+        return $this->hasMany(Reply::class)->latest();
     }
 
     public function owner(){

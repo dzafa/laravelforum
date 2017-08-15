@@ -4,41 +4,22 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ThreadTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-     use DatabaseMigrations;
 
-     public function test_a_thread_has_replies(){
-
-         $thread = factory('App\Thread')->create();
-
-         $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $thread->replies);
-
-     }
-
-     public function test_a_thread_has_an_owner(){
-
-        $thread = factory('App\Thread')->create();
-
-        $this->assertInstanceOf('App\User', $thread->owner);
+    public function test_thread_has_replies()
+    {
+         $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $this->thread->replies);
     }
 
-    public function a_thread_can_add_a_reply(){
+    public function test_thread_has_an_owner()
+    {
+        $this->assertInstanceOf('App\User', $this->thread->owner);
+    }
 
-        $thread = factory('App\Thread')->create();
-        
-        $thread->addReply([
-            'body' => 'Foobar',
-            'user_id' => 1
-        ]);
-
-        $this->assertCount(1, $thread->replies);
+    public function test_thread_can_have_replies()
+    {
+        $this->assertCount(1, $this->thread->replies);
     }
 }

@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('content')
@@ -24,11 +23,20 @@
         </div>
     </div>
     @if (auth()->check())
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-           Hello
+    <div class="row" style="padding:0px 0px 20px 0px;">
+        <div class="col-md-4 col-md-offset-4">
+             <form class="form-horizontal" method="POST" action="{{ $thread->path().'/replies'}}">
+                {{ csrf_field() }}
+                <div class="form-group">
+                    <textarea name="body" id="body" class="form-control" placeholder="Write something?" rows="5" required></textarea>
+                    <br/>
+                    <button type="submit" class="btn btn-default">Post</button>
+                </div>                
+            </form>
         </div>
     </div>
+    @else 
+        <p class="text-center">Please <a href="/login">sign in </a>to participate in this discussion<p>
     @endif
 </div>
 @endsection
