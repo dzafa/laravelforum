@@ -11,12 +11,11 @@
                 @foreach ($threads as $thread)
                     <article>
                         <h4><a href =" {{$thread->path()}}">
-                                {{$thread->title}}
+                                {{$thread->title}} 
                             </a>
-                        </h4>
-                        <div class="body">{{$thread->body}}</div>
+                        </h4>Created {{ $thread->created_at->diffForHumans()}}
+                        <hr>
                     </article>
-                    <hr>
                 @endforeach
                 </div>
             </div>

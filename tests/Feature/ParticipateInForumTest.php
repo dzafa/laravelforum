@@ -24,4 +24,19 @@ class ParticipateInForum extends TestCase
         $this->get($this->thread->path())
             ->assertSee($reply->body);
     }
+
+    public function test_a_reply_requires_body()
+    {
+        $this->publishReply(['body' => null])
+            ->assertSessionHasErrors('body');
+    }
+
+    public function publishReply($attributes = [])
+    {
+        $this->withExceptionHandling()->signIn();
+        
+        $reply = make('App\Reply', $attributes);
+
+        return $this->post($this->thread->path().'/replies', $reply->toArray());
+    }    
 }

@@ -18,7 +18,7 @@ class ThreadTest extends TestCase
         $this->assertInstanceOf('App\User', $this->thread->owner);
     }
 
-    public function test_thread_can_have_replies()
+    public function test_thread_can_add_a_replies()
     {
         $this->assertCount(1, $this->thread->replies);
     }
@@ -27,5 +27,11 @@ class ThreadTest extends TestCase
     {
         $thread = create('App\Thread');
         $this->assertInstanceOf('App\Channel', $thread->channel);
+    }
+
+    public function test_thread_can_create_a_string_path()
+    {
+        $thread = create('App\Thread');
+        $this->assertEquals("/threads/{$thread->channel->slug}/{$thread->id}", $thread->path());
     }
 }

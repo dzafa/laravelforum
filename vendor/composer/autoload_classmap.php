@@ -3047,7 +3047,6 @@ return array(
     'Tests\\CreatesApplication' => $baseDir . '/tests/CreatesApplication.php',
     'Tests\\Feature\\CreateThreadTest' => $baseDir . '/tests/Feature/CreateThreadTest.php',
     'Tests\\Feature\\ParticipateInForum' => $baseDir . '/tests/Feature/ParticipateInForumTest.php',
-    'Tests\\Feature\\ThreadsTest' => $baseDir . '/tests/Feature/ThreadsTest.php',
     'Tests\\TestCase' => $baseDir . '/tests/TestCase.php',
     'Tests\\Unit\\ReplyTest' => $baseDir . '/tests/Unit/ReplyTest.php',
     'Tests\\Unit\\ThreadTest' => $baseDir . '/tests/Unit/ThreadTest.php',

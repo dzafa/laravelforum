@@ -14,11 +14,19 @@
                         <input id="title" type="title" class="form-control" name="title" value="{{ old('title') }}" required autofocus>        
                     </div>
                     <div class="form-group">
+                    <label for="channel">Select Channel</label>
+                    <select class="form-control" name="channel_id">
+                    @foreach (App\Channel::all() as $channel)
+                        <option value="{{$channel->id}}">{{$channel->name}}</option>
+                    @endforeach
+                    </select>
+                    </div>
+                    <div class="form-group">
                         <label for="body">Body</label>
                         <textarea name="body" id="body" class="form-control" placeholder="Write something?" rows="5" required></textarea>      
                     </div>    
                     <div class="form-group">
-                    <button type="submit" class="btn btn-default">Post</button>     </div>               
+                    <button type="submit" class="btn btn-success">Submit new thread</button>     </div>               
                 </form>
                 </div>
             </div>

@@ -5,9 +5,12 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Created by 
+                <div class="panel-heading">
+                <h4>{{$thread->title}}</h4>
+                <br/>Created by 
                     <a href="#">{{$thread->owner->name}}</a>
-                        {{$thread->title}}</div>
+                    on {{ $thread->created_at->diffForHumans()}}
+                        </div> 
                 <div class="panel-body">
                     <div class="body">{{$thread->body}}</div>
                     

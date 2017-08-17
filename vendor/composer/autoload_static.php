@@ -3341,7 +3341,6 @@ class ComposerStaticInitc3616ce04cac6d41377dd33fb417829f
         'Tests\\CreatesApplication' => __DIR__ . '/../..' . '/tests/CreatesApplication.php',
         'Tests\\Feature\\CreateThreadTest' => __DIR__ . '/../..' . '/tests/Feature/CreateThreadTest.php',
         'Tests\\Feature\\ParticipateInForum' => __DIR__ . '/../..' . '/tests/Feature/ParticipateInForumTest.php',
-        'Tests\\Feature\\ThreadsTest' => __DIR__ . '/../..' . '/tests/Feature/ThreadsTest.php',
         'Tests\\TestCase' => __DIR__ . '/../..' . '/tests/TestCase.php',
         'Tests\\Unit\\ReplyTest' => __DIR__ . '/../..' . '/tests/Unit/ReplyTest.php',
         'Tests\\Unit\\ThreadTest' => __DIR__ . '/../..' . '/tests/Unit/ThreadTest.php',

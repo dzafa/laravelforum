@@ -53,9 +53,7 @@ $factory->define(App\Reply::class, function ($faker){
 
 $factory->define(App\Channel::class, function ($faker){
     $faker->locale = 'hr_HR';
-
     $name = $faker->word;
-
     return [
         'name' => $name,
         'slug' => $name
