@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Thread;
+use App\User;
 use Illuminate\Http\Request;
 
 class ThreadsController extends Controller
@@ -19,7 +20,16 @@ class ThreadsController extends Controller
 
     public function index()
     {
-        $threads = Thread::latest()->get();
+        $threadsList = Thread::latest();
+
+        if($username = (request('by')))
+        {
+            $user = User::where('name', $username)->firstOrFail();
+            $threadsList->where('user_id', $user->id);
+        }
+
+        $threads = $threadsList->get();
+ 
         return view('threads.index', compact('threads'));
     }
 

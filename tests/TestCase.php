@@ -22,7 +22,7 @@ abstract class TestCase extends BaseTestCase
 
         $this->disableExceptionHandling();
 
-        $this->thread = create('App\Thread');
+        $this->thread = create('App\Thread');       
 
         $this->reply = create('App\Reply', ['thread_id' => $this->thread->id]);
     }
