@@ -1,51 +1,71 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+[![Latest Stable Version](https://poser.pugx.org/jetbrains/phpstorm-workshop/v/stable.png)](https://packagist.org/packages/jetbrains/phpstorm-workshop) [![Total Downloads](https://poser.pugx.org/jetbrains/phpstorm-workshop/downloads.png)](https://packagist.org/packages/jetbrains/phpstorm-workshop) [![Latest Unstable Version](https://poser.pugx.org/jetbrains/phpstorm-workshop/v/unstable.png)](https://packagist.org/packages/jetbrains/phpstorm-workshop) [![License](https://poser.pugx.org/jetbrains/phpstorm-workshop/license.png)](https://packagist.org/packages/jetbrains/phpstorm-workshop)
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+# PhpStorm Workshop
 
-## About Laravel
+In these materials, you'll learn about many of the features and productivity tools available in [PhpStorm](http://www.jetbrains.com/phpstorm) IDE. 
+Examples are navigation, editing, inspections, live templates, refactoring, tools like Composer and the REST client and many more things.
+ It's virtually impossible to cover every option and feature in PhpStorm, but we're providing many practical exercises on how we can do our daily work as a PHP developer.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+We'll also cover a vast amount of keyboard shortcuts to make working with PhpStorm more efficient. Other IntelliJ IDEA 
+based IDE's use the same keyboard shortcuts, so if you know how to work with PhpStorm, you'll know how to work with 
+WebStorm, RubyMine, PyCharm, IntelliJ IDEA and more. A [cheat sheet is available online](http://bit.ly/1Ni0XJ0) 
+and is also included in the workshop download.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+This workshop is self-paced, meaning you can work your way through slides and exercises on your own, whenever and wherever you want. 
+Exercises come as a PhpStorm project in which every file is a new task that may contain code and tips to get things done.
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb combination of simplicity, elegance, and innovation give you tools you need to build any application with which you are tasked.
+## Prerequisites
 
-## Learning Laravel
+* Docker for Mac, Docker for Windows or Docker (Linux) 1.13+
+* PhpStorm 2016.3+
 
-Laravel has the most extensive and thorough documentation and video tutorial library of any modern web application framework. The [Laravel documentation](https://laravel.com/docs) is thorough, complete, and makes it a breeze to get started learning the framework.
+## Getting the Project
+There are a couple of ways to get started with the PhpStorm workshop materials:
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 900 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+* Create a new project using Composer. Note that you can also create a new project in PhpStorm 
+and use the Composer project type and search for "jetbrains/phpstorm-workshop" and select *docker* in version field.
 
-## Laravel Sponsors
+    ``php composer.phar create-project jetbrains/phpstorm-workshop docker -s dev``
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](http://patreon.com/taylorotwell):
+* Clone the project using GitHub
 
-- **[Vehikl](http://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Styde](https://styde.net)**
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
+    ``git clone https://github.com/JetBrains/phpstorm-workshop.git``
+    
+    ``git checkout docker``
 
-## Contributing
+* Download the ZIP
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+    ``wget https://github.com/JetBrains/phpstorm-workshop/archive/docker.zip``
 
-## Security Vulnerabilities
+## Getting Started
+Most exercises not related to Editor require having Docker containers running. 
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+Before you start you need to:
+1. Open Settings|Build, Execution, Deployment|Docker and enter the following API URL:
 
-## License
+    * Windows:  `tcp://localhost:2375`
+    * Linux, macOS: `unix:///var/run/docker.sock`
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+
+2. Update `XDEBUG_CONFIG` variable in `docker-compose.yml` with your IP address. That is necessary for Web Debugging.
+ 
+    To get the right IP address that is available from Docker please use one of the following command:
+    
+    * Windows:  execute `ipconfig` and copy ip from `DockerNAT` interface from `IPv4 Address` field
+    * macOS: execute `ifconfig en0` and copy IP from `inet` field
+    * Linux: execute `ifconfig docker0` and copy ip from `inet addr` field
+
+3. Uncomment an appropriate line for `sftp` service in the same `docker-compose.yml`. That is necessary for Deployment to work correctly.
+4. Start all required Docker containers executing `docker-compose up` inside Terminal.
+
+There are some things to know about the project:
+
+* The project can be opened as-is in PhpStorm. We've included configurations for PHP Remote Interpreter, Database, Deployment Server, PHP Web Debug, PHPUnit, and Behat.
+* All numbered folders contain exercises that you can work on. Simply open the numbered files one by one and follow the comments in the file. Most exercises are self-contained, others build on previous exercises.
+* Some of the excercises are in Markdown format, you can read these files easier (like this one) by toggling the View to *Show Preview Only* in the top right hand corner.
+* The PhpStorm Reference Card.pdf is the PhpStorm keymap. The latest version can always be found on the [PhpStorm website](http://bit.ly/1Ni0XJ0).
+
+## Open Source and Contribution
+The workshop is Open Source, licensed under the Apache 2 license. If you would like to contribute to the workshop materials, 
+please feel free to fork the repo and send us a pull request. Or if you have a comment, question, or suggestion for improvements, 
+please [raise an issue](https://github.com/JetBrains/phpstorm-workshop/issues).

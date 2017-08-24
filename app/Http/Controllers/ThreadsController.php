@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Thread;
 use App\User;
+use App\Filters\ThreadFilters;
 use Illuminate\Http\Request;
 
 class ThreadsController extends Controller
@@ -18,18 +19,18 @@ class ThreadsController extends Controller
          $this->middleware('auth')->only(['create','store']);
     }
 
-    public function index()
+    /**
+     * @param ThreadFilters $filters
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index(ThreadFilters $filters)
     {
-        $threadsList = Thread::latest();
+        $threads = Thread::filter($filters)->latest()->paginate(10);
 
-        if($username = (request('by')))
-        {
-            $user = User::where('name', $username)->firstOrFail();
-            $threadsList->where('user_id', $user->id);
+        if(request()->wantsJson()){
+            return $threads;
         }
 
-        $threads = $threadsList->get();
- 
         return view('threads.index', compact('threads'));
     }
 
@@ -74,8 +75,9 @@ class ThreadsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($channelId, Thread $thread)
-    {   
-        return view('threads.show', compact('thread'));
+    {
+        $replies = $thread->replies()->paginate(10);
+        return view('threads.show', compact('thread','replies'));
     }
 
     /**

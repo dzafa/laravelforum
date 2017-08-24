@@ -12,6 +12,15 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style>
+        .level {
+            display: flex; align-items: center;
+        }
+        .flex{
+            flex: 1;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -36,18 +45,24 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Browse Channels <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/threads">All Channels</a></li>
-                            @foreach ($channels as $channel)
-                            <li><a href="/threads/{{$channel->slug}}">{{ $channel->name}}</a></li>
-                            @endforeach
-                        </ul>
                         <li><a href="/threads/create">New Thread</a></li>
                         @if (Auth::check())
-                        <li><a href="/threads?by={{ auth()->user()->name}}">My Threads</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Choose a filter<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/threads?by={{ auth()->user()->name}}">My Threads</a></li>
+                                </ul>
+                            </li>
                         @endif
+                        <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Browse Channels <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/threads">All Channels</a></li>
+                                @foreach ($channels as $channel)
+                                <li><a href="/threads/{{$channel->slug}}">{{ $channel->name}}</a></li>
+                                @endforeach
+                            </ul>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

@@ -9,7 +9,7 @@ class ChannelsController extends Controller
 {
     public function show(Channel $channel)
     {         
-        $threads = $channel->threads()->get();
+        $threads = $channel->threads()->paginate(10);
         return view('threads.index', compact('threads'));
     }
 }
