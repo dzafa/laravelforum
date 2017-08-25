@@ -112,9 +112,6 @@ class CreateThreadTest extends TestCase
         $threadWithTwoReplies = create('App\Thread');
         create('App\Reply',['thread_id' => $threadWithTwoReplies->id],2);
 
-        $threadWithOneReplies = create('App\Thread');
-        create('App\Reply',['thread_id' => $threadWithOneReplies->id],1);
-
         $threadWithThreeReplies = create('App\Thread');
         create('App\Reply',['thread_id' => $threadWithThreeReplies->id],3);
 
@@ -122,6 +119,6 @@ class CreateThreadTest extends TestCase
 
         $response = $this->getJson('threads?popular=1')->json();
 
-        $this->assertEquals([3,2,1,0], array_column($response, 'replies_count'));
+        $this->assertEquals([3,2,1], array_column($response["data"], 'replies_count'));
     }
 }

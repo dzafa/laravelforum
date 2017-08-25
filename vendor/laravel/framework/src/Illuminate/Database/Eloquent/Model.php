@@ -380,6 +380,21 @@ abstract class Model implements ArrayAccess, Arrayable, Jsonable, JsonSerializab
     }
 
     /**
+     * Eager load relations on the model if they are not already eager loaded.
+     *
+     * @param  array|string  $relations
+     * @return $this
+     */
+    public function loadMissing($relations)
+    {
+        $relations = is_string($relations) ? func_get_args() : $relations;
+
+        return $this->load(array_filter($relations, function ($relation) {
+            return ! $this->relationLoaded($relation);
+        }));
+    }
+
+    /**
      * Increment a column's value by a given amount.
      *
      * @param  string  $column
@@ -957,17 +972,19 @@ abstract class Model implements ArrayAccess, Arrayable, Jsonable, JsonSerializab
     /**
      * Reload the current model instance with fresh attributes from the database.
      *
-     * @return void
+     * @return $this
      */
     public function refresh()
     {
         if (! $this->exists) {
-            return;
+            return $this;
         }
 
         $this->load(array_keys($this->relations));
 
         $this->setRawAttributes(static::findOrFail($this->getKey())->attributes);
+
+        return $this;
     }
 
     /**

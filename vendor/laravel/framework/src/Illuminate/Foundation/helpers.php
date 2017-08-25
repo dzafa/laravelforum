@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Carbon;
 use Illuminate\Support\HtmlString;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Bus\Dispatcher;
@@ -570,13 +571,27 @@ if (! function_exists('mix')) {
         $manifest = $manifests[$manifestPath];
 
         if (! isset($manifest[$path])) {
-            throw new Exception(
-                "Unable to locate Mix file: {$path}. Please check your ".
-                'webpack.mix.js output paths and try again.'
-            );
+            report(new Exception("Unable to locate Mix file: {$path}."));
+
+            if (! app('config')->get('app.debug')) {
+                return $path;
+            }
         }
 
         return new HtmlString($manifestDirectory.$manifest[$path]);
+    }
+}
+
+if (! function_exists('now')) {
+    /**
+     * Create a new Carbon instance for the current time.
+     *
+     * @param  \DateTimeZone|string|null $tz
+     * @return \Illuminate\Support\Carbon
+     */
+    function now($tz = null)
+    {
+        return Carbon::now($tz);
     }
 }
 
@@ -802,6 +817,19 @@ if (! function_exists('storage_path')) {
     function storage_path($path = '')
     {
         return app('path.storage').($path ? DIRECTORY_SEPARATOR.$path : $path);
+    }
+}
+
+if (! function_exists('today')) {
+    /**
+     * Create a new Carbon instance for the current date.
+     *
+     * @param  \DateTimeZone|string|null $tz
+     * @return \Illuminate\Support\Carbon
+     */
+    function today($tz = null)
+    {
+        return Carbon::today($tz);
     }
 }
 

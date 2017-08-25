@@ -10,6 +10,7 @@ class ThreadFilters extends Filters
     protected $filters = ['by','popular'];
 
     /**
+     * Filter query by username
      * @param $username
      * @return mixed
      */
@@ -20,7 +21,14 @@ class ThreadFilters extends Filters
         return $this->query->where('user_id', $user->id);
     }
 
+    /**
+     * Filter query according most popular threads
+     * @return mixed
+     */
     protected function popular(){
-        return $this->query->order_by('replies_count','desc');
+
+        $this->query->getQuery()->orders = [];
+
+        return $this->query->orderBy('replies_count','desc');
     }
 }

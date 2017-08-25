@@ -209,9 +209,7 @@ class Router implements RegistrarContract, BindingRegistrar
      */
     public function any($uri, $action = null)
     {
-        $verbs = ['GET', 'HEAD', 'POST', 'PUT', 'PATCH', 'DELETE'];
-
-        return $this->addRoute($verbs, $uri, $action);
+        return $this->addRoute(self::$verbs, $uri, $action);
     }
 
     /**
@@ -239,7 +237,7 @@ class Router implements RegistrarContract, BindingRegistrar
      */
     public function view($uri, $view, $data = [])
     {
-        return $this->get($uri, '\Illuminate\Routing\ViewController')
+        return $this->match(['GET', 'HEAD'], $uri, '\Illuminate\Routing\ViewController')
                 ->defaults('view', $view)
                 ->defaults('data', $data);
     }

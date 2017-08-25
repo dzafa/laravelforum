@@ -6,11 +6,16 @@
         <div class="col-md-8">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                <h4>{{$thread->title}}</h4>
+                    <div class="level">
+                        <div class="flex">
+                            <h4>{{$thread->title}}</h4> <span class="label label-success">{{ $thread->channel->name }}</span>
+                        </div>
+                    </div>
                 <br/>Created by 
                     <a href="#">{{$thread->owner->name}}</a>
                     on {{ $thread->created_at->diffForHumans()}}
-                        </div> 
+                        </div>
+
                 <div class="panel-body">
                     <div class="body">{{$thread->body}}</div>
 
