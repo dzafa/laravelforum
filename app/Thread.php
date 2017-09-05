@@ -8,6 +8,8 @@ class Thread extends Model
 {
     protected $fillable = ['title','body','user_id','channel_id'];
 
+    protected $with = ['owner','channel'];
+
     protected static function boot()
     {
         parent::boot();
@@ -25,7 +27,6 @@ class Thread extends Model
     public function replies()
     {
         return $this->hasMany(Reply::class)->latest();
-
     }
 
     public function owner()

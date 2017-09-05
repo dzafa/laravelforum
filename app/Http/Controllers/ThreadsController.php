@@ -16,7 +16,7 @@ class ThreadsController extends Controller
      */
     public function __construct()
     {
-         $this->middleware('auth')->only(['create','store']);
+         $this->middleware('auth')->except(['index','show']);
     }
 
     /**
@@ -25,6 +25,7 @@ class ThreadsController extends Controller
      */
     public function index(ThreadFilters $filters)
     {
+
         $threads = Thread::latest()->filter($filters)->paginate(10);
 
         if(request()->wantsJson()){
@@ -74,7 +75,7 @@ class ThreadsController extends Controller
      * @param  \App\Thread  $thread
      * @return \Illuminate\Http\Response
      */
-    public function show($channelId, Thread $thread)
+    public function show($channel, Thread $thread)
     {
         $replies = $thread->replies()->paginate(10);
         return view('threads.show', compact('thread','replies'));
@@ -109,8 +110,17 @@ class ThreadsController extends Controller
      * @param  \App\Thread  $thread
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Thread $thread)
+    public function destroy($channel, Thread $thread)
     {
-        //
+        $this->authorize('update', $thread);
+
+        $thread->replies()->delete();
+        $thread->delete();
+
+        if(request()->wantsJson()){
+            return response(['status' => 'Deleted'], 204);
+        }
+
+        return redirect('/threads');
     }
 }

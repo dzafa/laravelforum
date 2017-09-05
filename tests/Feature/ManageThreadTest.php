@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class CreateThreadTest extends TestCase
+class ManageThreadTest extends TestCase
 {   
 
     public function test_guest_can_not_create_new_thread()
@@ -120,5 +120,14 @@ class CreateThreadTest extends TestCase
         $response = $this->getJson('threads?popular=1')->json();
 
         $this->assertEquals([3,2,1], array_column($response["data"], 'replies_count'));
+    }
+
+    public function test_threads_can_be_deleted_by_owner()
+    {
+        $this->signIn();
+        $thread = create('App\Thread');
+
+        $this->json('DELETE', $thread->path());
+        //$this->assertDatabaseMissing('threads',['id' => 2]);
     }
 }

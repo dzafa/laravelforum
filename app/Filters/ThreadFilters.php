@@ -21,7 +21,7 @@ class ThreadFilters extends Filters
         return $this->query->where('user_id', $user->id);
     }
 
-    /**
+    /*
      * Filter query according most popular threads
      * @return mixed
      */
